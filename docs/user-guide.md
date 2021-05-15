@@ -13,6 +13,10 @@ Please see the [steps](https://github.com/cloudnativelabs/kube-router/tree/maste
 ### kubeadm
 Please see the [steps](https://github.com/cloudnativelabs/kube-router/blob/master/docs/kubeadm.md) to deploy Kubernetes cluster with Kube-router using [Kubeadm](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/)
 
+### k0sproject
+k0s by default uses kube-router as a CNI option.
+Please see the [steps](https://docs.k0sproject.io/latest/install/) to deploy Kubernetes cluster with Kube-router using [k0s](https://docs.k0sproject.io/)
+
 ### generic
 Please see the [steps](https://github.com/cloudnativelabs/kube-router/blob/master/docs/generic.md) to deploy kube-router on manually installed clusters
 
@@ -214,6 +218,11 @@ Service ClusterIP if it is logging the source IP.
 To enable hairpin traffic for Service `my-service`:
 ```
 kubectl annotate service my-service "kube-router.io/service.hairpin="
+```
+
+If you want to also hairpin externalIPs declared for Service `my-service` (note, you must also either enable global hairpin or service hairpin (see above ^^^)  for this to have an effect):
+```
+kubectl annotate service my-service "kube-router.io/service.hairpin.externalips="
 ```
 
 ## Direct server return
